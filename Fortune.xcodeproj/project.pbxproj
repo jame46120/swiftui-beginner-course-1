@@ -12,6 +12,7 @@
 		901DE64727A2C3EF00832011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 901DE64627A2C3EF00832011 /* Assets.xcassets */; };
 		901DE64A27A2C3EF00832011 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 901DE64927A2C3EF00832011 /* Preview Assets.xcassets */; };
 		901DE65127A2C45600832011 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901DE65027A2C45600832011 /* Item.swift */; };
+		90DB9A1F27A7DB9F004CCA2C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB9A1E27A7DB9F004CCA2C /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		901DE64627A2C3EF00832011 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		901DE64927A2C3EF00832011 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		901DE65027A2C45600832011 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		90DB9A1E27A7DB9F004CCA2C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				901DE64227A2C3E500832011 /* FortuneApp.swift */,
 				901DE64427A2C3E500832011 /* ContentView.swift */,
+				90DB9A1E27A7DB9F004CCA2C /* DetailView.swift */,
 				901DE65027A2C45600832011 /* Item.swift */,
 				901DE64627A2C3EF00832011 /* Assets.xcassets */,
 				901DE64827A2C3EF00832011 /* Preview Content */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				901DE64527A2C3E500832011 /* ContentView.swift in Sources */,
+				90DB9A1F27A7DB9F004CCA2C /* DetailView.swift in Sources */,
 				901DE65127A2C45600832011 /* Item.swift in Sources */,
 				901DE64327A2C3E500832011 /* FortuneApp.swift in Sources */,
 			);

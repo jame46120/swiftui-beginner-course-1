@@ -11,14 +11,17 @@ struct ContentView: View {
     @State private var currentTodo = ""
     @State private var todos: [Item] = []
     @State private var showingAlert = false
+    @State private var showingView = false
     @State private var yourFortune = ""
     
     var body: some View {
         NavigationView{
             VStack{
                 HStack{
-                    TextField("New fortune...", text: $currentTodo)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    TextEditor(text: $currentTodo)
+                        .overlay(RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.pink, lineWidth: 2))
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
                     Button(action:{
                         guard !self.currentTodo.isEmpty else{return}
                         self.todos.append(Item(todo: self.currentTodo))
@@ -36,23 +39,25 @@ struct ContentView: View {
                     Alert(
                         title: Text("Your fortune is"),
                         message: Text(yourFortune),
-                        primaryButton: .destructive(Text("Delete")) {
-                                            print("Deleting...")
+                        primaryButton: .destructive(Text("Read More")) {
+                            self.showingView = true
                         },
                         secondaryButton: .cancel()
                     )
-                   
-                }
+                }.foregroundColor(Color.pink)
+                NavigationLink(destination: DetailView(detailText: yourFortune), isActive: $showingView) {}
                 List{
                     ForEach(todos){
                         todoEntry in
-                        NavigationLink(destination: Text(todoEntry.todo)) {
-                                            Text(todoEntry.todo)
+                        NavigationLink(destination: DetailView(detailText: todoEntry.todo)) {
+                            Text(todoEntry.todo)
+                                .lineLimit(2)
                         }
                     }
                 }
             }
         }
+        .navigationBarTitle("Fortune App")
     }
 }
 
