@@ -10,13 +10,12 @@ import SwiftUI
 struct ContentView: View {
     @State private var currentTodo = ""
     @State private var todos: [Item] = []
-    @State private var showingAlert = false
     @State private var showingView = false
-    @State private var yourFortune:Item?
-    @State private var showingAlert1 = false
-    @State private var showingAlert2 = false
+    @State private var yourFortune: Item?
+    @State private var showingAlert = false
     
     var body: some View {
+        
         NavigationView{
             VStack{
                 HStack{
@@ -36,22 +35,21 @@ struct ContentView: View {
                 .padding()
 
                 Button("Fortune"){
-                    showingAlert1 = true
+                    showingAlert = true
                     yourFortune = todos.randomElement()
 
                 }
-                
-                .alert("Your fortune is \(yourFortune?.todo ?? "")", isPresented: $showingAlert1, presenting: yourFortune) { fortune in
+                .alert("Your Fortune is...", isPresented: $showingAlert, actions: {
                     Button("Done"){
-                        
-                        yourFortune = fortune
                         showingView = true
                     }
                     Button("Again!"){
-                        showingAlert1 = true
                         yourFortune = todos.randomElement()
+                        showingAlert = true
                     }
-                }
+                }, message: {
+                    Text(yourFortune?.todo ?? "")
+                })
                 .padding()
                 .background(Color.pink.cornerRadius(8))
                 .foregroundColor(.white)
