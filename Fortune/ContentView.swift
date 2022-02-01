@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var showingAlert = false
     @State private var showingView = false
     @State private var yourFortune = ""
+    @State private var showingAlert1 = false
+    @State private var showingAlert2 = false
     
     var body: some View {
         NavigationView{
@@ -32,19 +34,28 @@ struct ContentView: View {
                     .padding(.leading, 5)
                 }
                 .padding()
-                Button("Fortune") {
-                    showingAlert = true
+
+                Button("Fortune"){
+                    showingAlert1 = true
                     yourFortune = todos.randomElement()?.todo ?? ""
-                }.alert(isPresented: $showingAlert){
-                    Alert(
-                        title: Text("Your fortune is"),
-                        message: Text(yourFortune),
-                        primaryButton: .destructive(Text("Read More")) {
-                            self.showingView = true
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }.foregroundColor(Color.pink)
+
+                }
+                
+                .alert("Your fortune is \(yourFortune)", isPresented: $showingAlert1, presenting: yourFortune) { fortune in
+                    Button("Done"){
+                        yourFortune = fortune
+                        showingView = true
+                    }
+                    Button("Again!"){
+                        showingAlert1 = true
+                        yourFortune = todos.randomElement()?.todo ?? ""
+                    }
+                }
+                .padding()
+                .background(Color.pink.cornerRadius(8))
+                .foregroundColor(.white)
+                
+                Spacer()
                 NavigationLink(destination: DetailView(detailText: yourFortune), isActive: $showingView) {}
                 List{
                     ForEach(todos){
@@ -56,8 +67,9 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationBarTitle("Fortune App")
         }
-        .navigationBarTitle("Fortune App")
+        
     }
 }
 
