@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var todos: [Item] = []
     @State private var showingAlert = false
     @State private var showingView = false
-    @State private var yourFortune = ""
+    @State private var yourFortune:Item?
     @State private var showingAlert1 = false
     @State private var showingAlert2 = false
     
@@ -37,18 +37,19 @@ struct ContentView: View {
 
                 Button("Fortune"){
                     showingAlert1 = true
-                    yourFortune = todos.randomElement()?.todo ?? ""
+                    yourFortune = todos.randomElement()
 
                 }
                 
-                .alert("Your fortune is \(yourFortune)", isPresented: $showingAlert1, presenting: yourFortune) { fortune in
+                .alert("Your fortune is \(yourFortune?.todo ?? "")", isPresented: $showingAlert1, presenting: yourFortune) { fortune in
                     Button("Done"){
+                        
                         yourFortune = fortune
                         showingView = true
                     }
                     Button("Again!"){
                         showingAlert1 = true
-                        yourFortune = todos.randomElement()?.todo ?? ""
+                        yourFortune = todos.randomElement()
                     }
                 }
                 .padding()
@@ -56,7 +57,7 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 
                 Spacer()
-                NavigationLink(destination: DetailView(detailText: yourFortune), isActive: $showingView) {}
+                NavigationLink(destination: DetailView(detailText: yourFortune?.todo ?? ""), isActive: $showingView) {}
                 List{
                     ForEach(todos){
                         todoEntry in
