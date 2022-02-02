@@ -35,8 +35,10 @@ struct ContentView: View {
                 .padding()
 
                 Button("Fortune"){
-                    showingAlert = true
-                    yourFortune = todos.randomElement()
+                    if(!todos.isEmpty){
+                        showingAlert = true
+                        yourFortune = todos.randomElement()
+                    }
 
                 }
                 .alert("Your Fortune is...", isPresented: $showingAlert, actions: {
