@@ -8,39 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentTodo = ""
-    @State private var todos: [Item] = []
-    @State private var showingView = false
-    @State private var yourFortune: Item?
-    @State private var showingAlert = false
+    @State internal var currentTodo = ""
+    @State internal var todos = [Item]()
+    @State internal var showingView = false
+    @State internal var yourFortune: Item?
+    @State internal var showingAlert = false
+    @State internal var disabled = true
+    
     
     var body: some View {
         
         NavigationView{
             VStack{
-                HStack{
-                    TextEditor(text: $currentTodo)
-                        .overlay(RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.pink, lineWidth: 2))
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
-                    Button(action:{
-                        guard !self.currentTodo.isEmpty else{return}
-                        self.todos.append(Item(todo: self.currentTodo))
-                        self.currentTodo = ""
-                    }){
-                        Image(systemName: "text.badge.plus")
-                    }
-                    .padding(.leading, 5)
-                }
-                .padding()
+                fortuneInput
 
                 Button("Fortune"){
-                    if(!todos.isEmpty){
-                        showingAlert = true
-                        yourFortune = todos.randomElement()
-                    }
-
+                    showingAlert = true
+                    yourFortune = todos.randomElement()
                 }
+                .disabled(disabled)
                 .alert("Your Fortune is...", isPresented: $showingAlert, actions: {
                     Button("Done"){
                         showingView = true
